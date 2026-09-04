@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Erdo Algo turns EA and Pine Script ideas into testable, inspectable systems with explicit evidence boundaries.">
+  <meta property="og:title" content="Erdo Algo — Break the strategy before coding it">
+  <meta property="og:description" content="EA and Pine Script engineering with explicit evidence boundaries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://erdo-algo.github.io/erdo-algo-site/">
+  <meta property="og:image" content="https://c.mql5.com/31/2341/session-range-desk-screen-5994.png">
+  <meta name="theme-color" content="#f2efe5">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://c.mql5.com; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Erdo Algo — Break the strategy before coding it</title>
+  <link rel="canonical" href="https://erdo-algo.github.io/erdo-algo-site/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-grid" aria-hidden="true"></div>
+  <div class="cursor-light" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Erdo Algo home">
+      <span class="brand-mark" aria-hidden="true">E/A</span>
+      <span>ERDO ALGO</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#lab" data-copy="navLab">Stress Lab</a>
+      <a href="#case" data-copy="navCase">Evidence</a>
+      <a href="#process" data-copy="navProcess">Process</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-switch" id="language-switch" type="button" aria-label="Switch language">TR</button>
+      <a class="header-cta" href="https://www.mql5.com/en/users/erdemmmkaynak" target="_blank" rel="noreferrer" data-copy="navContact">MQL5 profile ↗</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow" data-copy="eyebrow">EA / PINE CLINIC · ISTANBUL</p>
+        <h1 id="hero-title" data-copy-rich="heroTitle">Break the strategy <em>before</em> coding it.</h1>
+        <p class="hero-lead" data-copy="heroLead">A good-looking backtest is not the finish line. I turn trading rules into testable systems, push them through hostile scenarios, and show what the evidence does — and does not — support.</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#lab" data-copy="heroCta">Enter the stress lab ↓</a>
+          <span class="action-note" data-copy="heroNote">No signals. No profit promises. Inspectable engineering.</span>
+        </div>
+      </div>
+
+      <div class="hero-machine" aria-label="Animated strategy inspection field">
+        <div class="machine-topline">
+          <span data-copy="machineTitle">ROBUSTNESS FIELD / DEMO</span>
+          <span class="live-state"><i></i><span data-copy="liveState">interactive</span></span>
+        </div>
+        <div class="orbital-field" aria-hidden="true">
+          <span class="orbit orbit-a"></span>
+          <span class="orbit orbit-b"></span>
+          <span class="orbit orbit-c"></span>
+          <span class="core">RULES</span>
+          <span class="satellite satellite-a">COST</span>
+          <span class="satellite satellite-b">REPAINT</span>
+          <span class="satellite satellite-c">GAP</span>
+        </div>
+        <p class="machine-caption" data-copy="machineCaption">Move your pointer. The field reacts; the evidence stays still.</p>
+      </div>
+    </section>
+
+    <section class="stress-lab" id="lab" aria-labelledby="lab-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / STRESS LAB</p>
+          <h2 id="lab-title" data-copy-rich="labTitle">Change the conditions.<br>Watch the weak point move.</h2>
+        </div>
+        <p data-copy="labIntro">This is an interaction demo, not market data. It shows how a review changes when assumptions change.</p>
+      </div>
+
+      <div class="lab-console">
+        <div class="console-chart" id="console-chart" aria-label="Synthetic stress response chart">
+          <div class="chart-grid" aria-hidden="true"></div>
+          <svg viewBox="0 0 800 360" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f6d44b" stop-opacity=".32"></stop>
+                <stop offset="1" stop-color="#f6d44b" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <path class="area-path" id="area-path"></path>
+            <path class="response-path" id="response-path"></path>
+          </svg>
+          <div class="chart-probe" id="chart-probe" aria-hidden="true"></div>
+          <div class="chart-tooltip" id="chart-tooltip" aria-hidden="true">STEP 01 · STABLE</div>
+          <span class="demo-stamp" data-copy="demoStamp">SYNTHETIC EXPLAINER — NOT PERFORMANCE</span>
+        </div>
+
+        <div class="console-side">
+          <div class="console-readout" aria-live="polite">
+            <div><span data-copy="coverageLabel">checks exposed</span><strong id="coverage-value">3 / 3</strong></div>
+            <div><span data-copy="loadLabel">risk load</span><strong id="load-value">NORMAL</strong></div>
+            <div><span data-copy="breakLabel">first break</span><strong id="break-value">SLIPPAGE</strong></div>
+          </div>
+          <div class="console-controls">
+            <fieldset>
+              <legend data-copy="regimeLegend">Market regime</legend>
+              <div class="regime-buttons">
+                <button type="button" data-regime="trend" aria-pressed="true" data-copy="trend">Trend</button>
+                <button type="button" data-regime="range" aria-pressed="false" data-copy="range">Range</button>
+                <button type="button" data-regime="chaos" aria-pressed="false" data-copy="chaos">Chaos</button>
+              </div>
+            </fieldset>
+            <label class="risk-control" for="risk-input">
+              <span><span data-copy="riskLabel">Assumption pressure</span><output id="risk-output">40%</output></span>
+              <input id="risk-input" type="range" min="10" max="100" step="10" value="40">
+            </label>
+            <button class="rerun-button" id="rerun-button" type="button" data-copy="rerun">Run the stress pass ↻</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-study" id="case" aria-labelledby="case-title">
+      <div class="section-heading case-heading">
+        <div>
+          <p class="section-index">02 / REAL CASE</p>
+          <h2 id="case-title">Session Range Desk MT5</h2>
+        </div>
+        <p data-copy="caseIntro">A public, free MQL5 Expert Advisor used here as a proof-boundary example.</p>
+      </div>
+
+      <figure class="evidence-figure">
+        <div class="evidence-image-wrap">
+          <img src="https://c.mql5.com/31/2341/session-range-desk-screen-5994.png" width="1365" height="768" loading="lazy" alt="Session Range Desk panel running inside a MetaTrader 5 tester chart">
+          <span>FIG. 01 / TESTER PANEL</span>
+        </div>
+        <figcaption>
+          <div class="evidence-meta">
+            <span>VERSION</span><strong>4.02</strong>
+            <span>STATUS</span><strong data-copy="published">PUBLIC / FREE</strong>
+            <span>VERIFIED</span><strong>2026-09-04</strong>
+          </div>
+          <div class="claim-block claim-positive">
+            <span data-copy="provesLabel">WHAT IT SUPPORTS</span>
+            <p data-copy="provesCopy">A real interface state exists; the product has a public MQL5 Market page; the project records local compile and nonvisual tester checks.</p>
+          </div>
+          <div class="claim-block claim-negative">
+            <span data-copy="notProvesLabel">WHAT IT DOES NOT PROVE</span>
+            <p data-copy="notProvesCopy">Profitability, live-account safety, broker independence, or prop-firm eligibility.</p>
+          </div>
+          <a class="case-link" href="https://www.mql5.com/en/market/product/194087" target="_blank" rel="noreferrer" data-copy="marketCta">Inspect the public product ↗</a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="process" id="process" aria-labelledby="process-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">03 / METHOD</p>
+          <h2 id="process-title" data-copy-rich="processTitle">One chain.<br>Three honest checkpoints.</h2>
+        </div>
+        <p data-copy="processIntro">Open a checkpoint to see what changes hands before the next stage begins.</p>
+      </div>
+      <div class="process-list">
+        <article class="process-item is-open">
+          <button type="button" aria-expanded="true">
+            <span>01</span><strong data-copy="processRule">Rule contract</strong><i>+</i>
+          </button>
+          <div class="process-detail"><p data-copy="processRuleCopy">Entry, exit, bar state, timing, data source, and risk rules become one testable manifest before implementation.</p></div>
+        </article>
+        <article class="process-item">
+          <button type="button" aria-expanded="false">
+            <span>02</span><strong data-copy="processBreak">Break map</strong><i>+</i>
+          </button>
+          <div class="process-detail"><p data-copy="processBreakCopy">Costs, gaps, restart behavior, repaint risk, and regime changes are isolated instead of blended into one flattering result.</p></div>
+        </article>
+        <article class="process-item">
+          <button type="button" aria-expanded="false">
+            <span>03</span><strong data-copy="processProof">Evidence package</strong><i>+</i>
+          </button>
+          <div class="process-detail"><p data-copy="processProofCopy">Screens, settings, versions, source links, and explicit evidence limits travel together.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" aria-labelledby="contact-title">
+      <p class="section-index">04 / CONTACT</p>
+      <h2 id="contact-title" data-copy-rich="contactTitle">Have a strategy?<br><em>Bring the weak version.</em></h2>
+      <p data-copy="contactCopy">I work on MQL5 Expert Advisors, Pine Script conversions, debugging, and evidence-first strategy reviews.</p>
+      <a class="contact-action" href="https://www.mql5.com/en/users/erdemmmkaynak" target="_blank" rel="noreferrer" data-copy="contactCta">Continue on MQL5 ↗</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 ERDO ALGO</span>
+    <span data-copy="footerDisclaimer">Engineering portfolio. No investment advice or return guarantee.</span>
+  </footer>
+</body>
+</html>

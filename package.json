@@ -1,0 +1,14 @@
+{
+  "name": "erdo-algo-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "serve": "npx --yes serve ."
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+

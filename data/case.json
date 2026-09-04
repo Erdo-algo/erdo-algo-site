@@ -1,0 +1,20 @@
+{
+  "id": "session-range-desk-v4-02",
+  "title": "Session Range Desk MT5",
+  "version": "4.02",
+  "last_verified": "2026-09-04",
+  "claim_level": "local-tested-and-market-published",
+  "claim": "The public MQL5 Market page shows version 4.2 as a free Expert Advisor. Local project records document a zero-error MetaEditor build and sequential nonvisual tester checks.",
+  "does_not_prove": [
+    "profitability",
+    "live-account safety",
+    "broker-independent behavior",
+    "prop-firm eligibility"
+  ],
+  "market_url": "https://www.mql5.com/en/market/product/194087",
+  "profile_url": "https://www.mql5.com/en/users/erdemmmkaynak",
+  "image_url": "https://c.mql5.com/31/2341/session-range-desk-screen-5994.png",
+  "image_context": "A real local tester panel capture from an earlier panel revision. It demonstrates interface state, not returns.",
+  "redaction_reviewed": true
+}
+
