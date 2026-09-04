@@ -35,7 +35,7 @@ const scenarios = {
 
 const copy = {
   en: {
-    navLab: 'Stress Lab', navCase: 'Evidence', navProcess: 'Process', navContact: 'MQL5 profile ↗',
+    navLab: 'Stress Lab', navCase: 'Evidence', navProcess: 'Process', navContact: 'Profile ↓',
     eyebrow: 'EA / PINE CLINIC · ISTANBUL',
     heroTitle: 'Break the strategy|[[before]] coding it.',
     heroLead: 'A good-looking backtest is not the finish line. I turn trading rules into testable systems, push them through hostile scenarios, and show what the evidence does — and does not — support.',
@@ -51,11 +51,11 @@ const copy = {
     processRule: 'Rule contract', processRuleCopy: 'Entry, exit, bar state, timing, data source, and risk rules become one testable manifest before implementation.',
     processBreak: 'Break map', processBreakCopy: 'Costs, gaps, restart behavior, repaint risk, and regime changes are isolated instead of blended into one flattering result.',
     processProof: 'Evidence package', processProofCopy: 'Screens, settings, versions, source links, and explicit evidence limits travel together.',
-    contactTitle: 'Have a strategy?|[[Bring the weak version.]]', contactCopy: 'I work on MQL5 Expert Advisors, Pine Script conversions, debugging, and evidence-first strategy reviews.', contactCta: 'Continue on MQL5 ↗',
+    contactTitle: 'A working portfolio.|[[Not a sales funnel.]]', contactCopy: 'This site collects the MQL5 products, Pine experiments, test notes, and evidence packages I can publish.', contactMql5: 'MQL5 profile ↗', contactMail: 'Send an email ↗', futureNote: 'Next public layer: an MQL5 Signal account, after its evidence boundary is ready.',
     footerDisclaimer: 'Engineering portfolio. No investment advice or return guarantee.', normal: 'NORMAL', elevated: 'ELEVATED', severe: 'SEVERE', stable: 'STABLE', stressed: 'STRESSED'
   },
   tr: {
-    navLab: 'Stres Alanı', navCase: 'Kanıt', navProcess: 'Süreç', navContact: 'MQL5 profili ↗',
+    navLab: 'Stres Alanı', navCase: 'Kanıt', navProcess: 'Süreç', navContact: 'Profil ↓',
     eyebrow: 'EA / PINE KLİNİĞİ · İSTANBUL',
     heroTitle: 'Stratejiyi kodlamadan|[[önce]] kır.',
     heroLead: 'Güzel görünen backtest bitiş çizgisi değildir. Trading kurallarını test edilebilir sistemlere çevirir, kötü senaryolarda zorlar ve kanıtın neyi destekleyip neyi desteklemediğini birlikte gösteririm.',
@@ -71,7 +71,7 @@ const copy = {
     processRule: 'Kural sözleşmesi', processRuleCopy: 'Giriş, çıkış, bar durumu, zamanlama, veri kaynağı ve risk kuralları uygulamadan önce test edilebilir tek manifeste dönüşür.',
     processBreak: 'Kırılma haritası', processBreakCopy: 'Maliyet, gap, yeniden başlatma davranışı, repaint riski ve rejim değişimi tek güzel sonucun içine karıştırılmadan ayrıştırılır.',
     processProof: 'Kanıt paketi', processProofCopy: 'Ekranlar, ayarlar, sürümler, kaynak bağlantıları ve açık kanıt sınırları beraber taşınır.',
-    contactTitle: 'Bir stratejin mi var?|[[Zayıf hâlini getir.]]', contactCopy: 'MQL5 Expert Advisor, Pine Script dönüşümü, hata ayıklama ve kanıt odaklı strateji incelemeleri üzerinde çalışıyorum.', contactCta: 'MQL5 üzerinden devam et ↗',
+    contactTitle: 'Çalışan bir portföy.|[[Satış hunisi değil.]]', contactCopy: 'Yayımlayabildiğim MQL5 ürünlerini, Pine deneylerini, test notlarını ve kanıt paketlerini bu sitede topluyorum.', contactMql5: 'MQL5 profili ↗', contactMail: 'E-posta gönder ↗', futureNote: 'Sonraki halka: kanıt sınırı hazır olduğunda MQL5 Signal hesabı.',
     footerDisclaimer: 'Mühendislik portföyü. Yatırım tavsiyesi veya getiri garantisi değildir.', normal: 'NORMAL', elevated: 'YÜKSEK', severe: 'AĞIR', stable: 'STABİL', stressed: 'ZORLANIYOR'
   }
 };
