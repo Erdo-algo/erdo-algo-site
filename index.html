@@ -57,14 +57,22 @@
           <span class="live-state"><i></i><span data-copy="liveState">interactive</span></span>
         </div>
         <div class="orbital-field" aria-hidden="true">
-          <span class="orbit orbit-a"></span>
-          <span class="orbit orbit-b"></span>
-          <span class="orbit orbit-c"></span>
-          <span class="core">RULES</span>
-          <span class="satellite satellite-a">COST</span>
-          <span class="satellite satellite-b">REPAINT</span>
-          <span class="satellite satellite-c">GAP</span>
+          <div class="orbit-stage">
+            <span class="radar-sweep"></span>
+            <span class="orbit-ring ring-1"></span>
+            <span class="orbit-ring ring-2"></span>
+            <span class="orbit-ring ring-3"></span>
+            <span class="orbit-arm arm-1"><i></i></span>
+            <span class="orbit-arm arm-2"><i></i></span>
+            <span class="orbit-arm arm-3"><i></i></span>
+            <span class="core"><em data-copy="orbitCore">RULES</em></span>
+          </div>
         </div>
+        <ul class="field-nodes" aria-hidden="true">
+          <li><i></i><span data-copy="orbitCost">COST</span></li>
+          <li><i></i><span data-copy="orbitRepaint">REPAINT</span></li>
+          <li><i></i><span data-copy="orbitGap">GAP</span></li>
+        </ul>
         <p class="machine-caption" data-copy="machineCaption">Move your pointer. The field reacts; the evidence stays still.</p>
       </div>
     </section>
@@ -72,10 +80,10 @@
     <section class="stress-lab" id="lab" aria-labelledby="lab-title">
       <div class="section-heading">
         <div>
-          <p class="section-index">01 / STRESS LAB</p>
+          <p class="section-index" data-copy="indexLab">01 / STRESS LAB</p>
           <h2 id="lab-title" data-copy-rich="labTitle">Change the conditions.<br>Watch the weak point move.</h2>
         </div>
-        <p data-copy="labIntro">This is an interaction demo, not market data. It shows how a review changes when assumptions change.</p>
+        <p data-copy="labIntro">Two versions of the same idea under one pressure: with the break map applied, and without it. A synthetic explainer, not market data.</p>
       </div>
 
       <div class="lab-console">
@@ -84,13 +92,22 @@
           <svg viewBox="0 0 800 360" preserveAspectRatio="none" aria-hidden="true">
             <defs>
               <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#f6d44b" stop-opacity=".32"></stop>
+                <stop offset="0" stop-color="#f6d44b" stop-opacity=".42"></stop>
                 <stop offset="1" stop-color="#f6d44b" stop-opacity="0"></stop>
               </linearGradient>
+              <pattern id="gap-fill" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="9" stroke="#f15545" stroke-width="1.7" stroke-opacity=".55"></line>
+              </pattern>
             </defs>
-            <path class="area-path" id="area-path"></path>
-            <path class="response-path" id="response-path"></path>
+            <path class="area-path" id="area-path" d="M 0.0 272.2 L 47.1 258.7 L 94.1 254.8 L 141.2 236.2 L 188.2 233.3 L 235.3 215.0 L 282.4 217.4 L 329.4 198.6 L 376.5 199.0 L 423.5 177.6 L 470.6 174.5 L 517.6 155.2 L 564.7 157.4 L 611.8 140.3 L 658.8 140.4 L 705.9 118.0 L 752.9 116.1 L 800.0 99.6 L 800 360 L 0 360 Z"></path>
+            <path class="gap-path" id="gap-path" d="M 0.0 272.2 L 47.1 258.7 L 94.1 254.8 L 141.2 236.2 L 188.2 233.3 L 235.3 215.0 L 282.4 217.4 L 329.4 198.6 L 376.5 199.0 L 423.5 177.6 L 470.6 174.5 L 517.6 155.2 L 564.7 157.4 L 611.8 140.3 L 658.8 140.4 L 705.9 118.0 L 752.9 116.1 L 800.0 99.6 L 800.0 145.5 L 752.9 156.6 L 705.9 156.5 L 658.8 177.8 L 611.8 173.8 L 564.7 186.2 L 517.6 177.6 L 470.6 194.6 L 423.5 195.7 L 376.5 218.1 L 329.4 211.2 L 282.4 229.9 L 235.3 219.0 L 188.2 238.7 L 141.2 236.0 L 94.1 259.3 L 47.1 255.6 L 0.0 272.2 Z"></path>
+            <path class="raw-path" id="raw-path" d="M 0.0 272.2 L 47.1 255.6 L 94.1 259.3 L 141.2 236.0 L 188.2 238.7 L 235.3 219.0 L 282.4 229.9 L 329.4 211.2 L 376.5 218.1 L 423.5 195.7 L 470.6 194.6 L 517.6 177.6 L 564.7 186.2 L 611.8 173.8 L 658.8 177.8 L 705.9 156.5 L 752.9 156.6 L 800.0 145.5"></path>
+            <path class="response-path" id="response-path" d="M 0.0 272.2 L 47.1 258.7 L 94.1 254.8 L 141.2 236.2 L 188.2 233.3 L 235.3 215.0 L 282.4 217.4 L 329.4 198.6 L 376.5 199.0 L 423.5 177.6 L 470.6 174.5 L 517.6 155.2 L 564.7 157.4 L 611.8 140.3 L 658.8 140.4 L 705.9 118.0 L 752.9 116.1 L 800.0 99.6"></path>
           </svg>
+          <div class="chart-legend" aria-hidden="true">
+            <span class="legend-item legend-guarded"><i></i><span data-copy="legendGuarded">break map applied</span></span>
+            <span class="legend-item legend-raw"><i></i><span data-copy="legendRaw">no break map</span></span>
+          </div>
           <div class="chart-probe" id="chart-probe" aria-hidden="true"></div>
           <div class="chart-tooltip" id="chart-tooltip" aria-hidden="true">STEP 01 · STABLE</div>
           <span class="demo-stamp" data-copy="demoStamp">SYNTHETIC EXPLAINER — NOT PERFORMANCE</span>
@@ -101,6 +118,7 @@
             <div><span data-copy="coverageLabel">checks exposed</span><strong id="coverage-value">3 / 3</strong></div>
             <div><span data-copy="loadLabel">risk load</span><strong id="load-value">NORMAL</strong></div>
             <div><span data-copy="breakLabel">first break</span><strong id="break-value">SLIPPAGE</strong></div>
+            <div class="readout-gap"><span data-copy="spreadLabel">control gap</span><strong id="spread-value">+16 pts</strong></div>
           </div>
           <div class="console-controls">
             <fieldset>
@@ -124,7 +142,7 @@
     <section class="case-study" id="case" aria-labelledby="case-title">
       <div class="section-heading case-heading">
         <div>
-          <p class="section-index">02 / REAL CASE</p>
+          <p class="section-index" data-copy="indexCase">02 / REAL CASE</p>
           <h2 id="case-title">Session Range Desk MT5</h2>
         </div>
         <p data-copy="caseIntro">A public, free MQL5 Expert Advisor used here as a proof-boundary example.</p>
@@ -132,8 +150,8 @@
 
       <figure class="evidence-figure">
         <div class="evidence-image-wrap">
-          <img src="https://c.mql5.com/31/2341/session-range-desk-screen-5994.png" width="1365" height="768" loading="lazy" alt="Session Range Desk panel running inside a MetaTrader 5 tester chart">
-          <span>FIG. 01 / TESTER PANEL</span>
+          <img src="media/srd-panel-overview.png" width="1600" height="1000" loading="lazy" alt="Session Range Desk panel overview sheet published on the MQL5 Market product page">
+          <span data-copy="figLabel">FIG. 01 / MARKET SHEET</span>
         </div>
         <figcaption>
           <div class="evidence-meta">
@@ -143,7 +161,7 @@
           </div>
           <div class="claim-block claim-positive">
             <span data-copy="provesLabel">WHAT IT SUPPORTS</span>
-            <p data-copy="provesCopy">A real interface state exists; the product has a public MQL5 Market page; the project records local compile and nonvisual tester checks.</p>
+            <p data-copy="provesCopy">This sheet is live on the public MQL5 Market product page; the panel inside it is an archived capture of the real interface (v4.01, USDJPY.5R M15 local test); the project records local compile and nonvisual tester checks.</p>
           </div>
           <div class="claim-block claim-negative">
             <span data-copy="notProvesLabel">WHAT IT DOES NOT PROVE</span>
@@ -157,7 +175,7 @@
     <section class="process" id="process" aria-labelledby="process-title">
       <div class="section-heading">
         <div>
-          <p class="section-index">03 / METHOD</p>
+          <p class="section-index" data-copy="indexMethod">03 / METHOD</p>
           <h2 id="process-title" data-copy-rich="processTitle">One chain.<br>Three honest checkpoints.</h2>
         </div>
         <p data-copy="processIntro">Open a checkpoint to see what changes hands before the next stage begins.</p>
@@ -194,7 +212,7 @@
         </div>
       </div>
       <div class="contact-content">
-        <p class="section-index">04 / PROFILE</p>
+        <p class="section-index" data-copy="indexProfile">04 / PROFILE</p>
         <h2 id="contact-title" data-copy-rich="contactTitle">A working portfolio.<br><em>Not a sales funnel.</em></h2>
         <p data-copy="contactCopy">This site collects the MQL5 products, Pine experiments, test notes, and evidence packages I can publish.</p>
         <div class="contact-actions">

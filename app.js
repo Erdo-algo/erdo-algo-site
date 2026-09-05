@@ -3,6 +3,8 @@ const chart = document.getElementById('console-chart');
 const chartSvg = chart.querySelector('svg');
 const responsePath = document.getElementById('response-path');
 const areaPath = document.getElementById('area-path');
+const rawPath = document.getElementById('raw-path');
+const gapPath = document.getElementById('gap-path');
 const probe = document.getElementById('chart-probe');
 const tooltip = document.getElementById('chart-tooltip');
 const riskInput = document.getElementById('risk-input');
@@ -10,6 +12,7 @@ const riskOutput = document.getElementById('risk-output');
 const coverageValue = document.getElementById('coverage-value');
 const loadValue = document.getElementById('load-value');
 const breakValue = document.getElementById('break-value');
+const spreadValue = document.getElementById('spread-value');
 const rerunButton = document.getElementById('rerun-button');
 const languageSwitch = document.getElementById('language-switch');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -18,20 +21,49 @@ let activeRegime = 'trend';
 let activeLanguage = 'en';
 let chartPoints = [];
 
+const STEPS = 18;
+const START_LEVEL = 22;
+const WAVE = [0, .5, -.4, .9, -.2, 1.1, -.8, .6, -1, .8, -.3, 1.2, -.7, .5, -1.1, .9, -.4, .7];
+
 const scenarios = {
   trend: {
-    points: [190, 186, 179, 183, 166, 171, 151, 156, 137, 143, 121, 129, 104, 112, 91, 98, 77, 84],
+    drift: 3.5,
+    wave: 3.2,
+    shock: [0, 0, .3, .8, .6, 1.6, 1.1, 2.4, 1.9, 3.4, 2.7, 4.4, 3.6, 5.4, 4.5, 6.5, 5.6, 7.4],
+    coverage: '3 / 3',
     breakPoint: { en: 'SLIPPAGE', tr: 'KAYMA' }
   },
   range: {
-    points: [190, 174, 186, 169, 193, 177, 204, 181, 211, 188, 206, 194, 219, 201, 227, 212, 221, 203],
+    drift: 1.7,
+    wave: 6.4,
+    shock: [0, .4, 1, .7, 1.8, 1.3, 2.6, 2, 3.5, 2.8, 4.4, 3.6, 5.4, 4.4, 6.4, 5.3, 7.4, 8.2],
+    coverage: '4 / 4',
     breakPoint: { en: 'WHIPSAW', tr: 'TESTERE' }
   },
   chaos: {
-    points: [190, 142, 181, 124, 207, 108, 232, 139, 244, 119, 216, 168, 255, 151, 269, 192, 280, 218],
+    drift: 2.4,
+    wave: 8.6,
+    shock: [0, .8, 2.2, 1.6, 3.6, 2.8, 5.2, 4.1, 6.8, 5.4, 8.4, 7, 10, 8.4, 11.6, 9.8, 13.2, 12],
+    coverage: '5 / 5',
     breakPoint: { en: 'GAP RISK', tr: 'GAP RİSKİ' }
   }
 };
+
+const clampLevel = value => Math.max(3, Math.min(97, value));
+const levelToY = level => 336 - level * 2.9;
+
+function buildSeries(scenario, pressure) {
+  const p = pressure / 100;
+  const guarded = [];
+  const raw = [];
+  for (let index = 0; index < STEPS; index += 1) {
+    const base = START_LEVEL + scenario.drift * index;
+    const wave = WAVE[index] * scenario.wave;
+    guarded.push(clampLevel(base + wave * (.55 + p * .45) - scenario.shock[index] * p * .55));
+    raw.push(clampLevel(base + wave * (.8 + p * 1.5) - scenario.shock[index] * (.2 + p * 5.9)));
+  }
+  return { guarded, raw };
+}
 
 const copy = {
   en: {
@@ -41,11 +73,15 @@ const copy = {
     heroLead: 'A good-looking backtest is not the finish line. I turn trading rules into testable systems, push them through hostile scenarios, and show what the evidence does — and does not — support.',
     heroCta: 'Enter the stress lab ↓', heroNote: 'No signals. No profit promises. Inspectable engineering.',
     machineTitle: 'ROBUSTNESS FIELD / DEMO', liveState: 'interactive', machineCaption: 'Move your pointer. The field reacts; the evidence stays still.',
-    labTitle: 'Change the conditions.|Watch the weak point move.', labIntro: 'This is an interaction demo, not market data. It shows how a review changes when assumptions change.',
+    orbitCore: 'RULES', orbitCost: 'COST', orbitRepaint: 'REPAINT', orbitGap: 'GAP',
+    labTitle: 'Change the conditions.|Watch the weak point move.', labIntro: 'Two versions of the same idea under one pressure: with the break map applied, and without it. A synthetic explainer, not market data.',
     demoStamp: 'SYNTHETIC EXPLAINER — NOT PERFORMANCE', coverageLabel: 'checks exposed', loadLabel: 'risk load', breakLabel: 'first break',
+    spreadLabel: 'control gap', points: 'pts', legendGuarded: 'break map applied', legendRaw: 'no break map',
+    indexLab: '01 / STRESS LAB', indexCase: '02 / REAL CASE', indexMethod: '03 / METHOD', indexProfile: '04 / PROFILE',
     regimeLegend: 'Market regime', trend: 'Trend', range: 'Range', chaos: 'Chaos', riskLabel: 'Assumption pressure', rerun: 'Run the stress pass ↻',
     caseIntro: 'A public, free MQL5 Expert Advisor used here as a proof-boundary example.', published: 'PUBLIC / FREE',
-    provesLabel: 'WHAT IT SUPPORTS', provesCopy: 'A real interface state exists; the product has a public MQL5 Market page; the project records local compile and nonvisual tester checks.',
+    provesLabel: 'WHAT IT SUPPORTS', provesCopy: 'This sheet is live on the public MQL5 Market product page; the panel inside it is an archived capture of the real interface (v4.01, USDJPY.5R M15 local test); the project records local compile and nonvisual tester checks.',
+    figLabel: 'FIG. 01 / MARKET SHEET',
     notProvesLabel: 'WHAT IT DOES NOT PROVE', notProvesCopy: 'Profitability, live-account safety, broker independence, or prop-firm eligibility.', marketCta: 'Inspect the public product ↗',
     processTitle: 'One chain.|Three honest checkpoints.', processIntro: 'Open a checkpoint to see what changes hands before the next stage begins.',
     processRule: 'Rule contract', processRuleCopy: 'Entry, exit, bar state, timing, data source, and risk rules become one testable manifest before implementation.',
@@ -61,11 +97,15 @@ const copy = {
     heroLead: 'Güzel görünen backtest bitiş çizgisi değildir. Trading kurallarını test edilebilir sistemlere çevirir, kötü senaryolarda zorlar ve kanıtın neyi destekleyip neyi desteklemediğini birlikte gösteririm.',
     heroCta: 'Stres alanına gir ↓', heroNote: 'Sinyal yok. Kâr vaadi yok. İncelenebilir mühendislik.',
     machineTitle: 'DAYANIKLILIK ALANI / DEMO', liveState: 'etkileşimli', machineCaption: 'İmleci hareket ettir. Alan tepki verir; kanıt yerinde kalır.',
-    labTitle: 'Koşulları değiştir.|Zayıf noktanın yerini izle.', labIntro: 'Bu bir etkileşim demosudur, piyasa verisi değildir. Varsayımlar değiştiğinde incelemenin nasıl değiştiğini gösterir.',
+    orbitCore: 'KURALLAR', orbitCost: 'MALİYET', orbitRepaint: 'REPAINT', orbitGap: 'GAP',
+    labTitle: 'Koşulları değiştir.|Zayıf noktanın yerini izle.', labIntro: 'Aynı fikrin iki sürümü aynı baskı altında: kırılma haritası çıkarılmış olan ve çıkarılmamış olan. Sentetik bir anlatım, piyasa verisi değil.',
     demoStamp: 'SENTETİK ANLATICI — PERFORMANS DEĞİLDİR', coverageLabel: 'görünen kontroller', loadLabel: 'risk yükü', breakLabel: 'ilk kırılma',
+    spreadLabel: 'kontrol farkı', points: 'puan', legendGuarded: 'kırılma haritası var', legendRaw: 'kırılma haritası yok',
+    indexLab: '01 / STRES ALANI', indexCase: '02 / GERÇEK VAKA', indexMethod: '03 / YÖNTEM', indexProfile: '04 / PROFİL',
     regimeLegend: 'Piyasa rejimi', trend: 'Trend', range: 'Yatay', chaos: 'Kaos', riskLabel: 'Varsayım baskısı', rerun: 'Stres turunu çalıştır ↻',
     caseIntro: 'Kanıt sınırını göstermek için kullanılan, herkese açık ve ücretsiz bir MQL5 Expert Advisor.', published: 'YAYINDA / ÜCRETSİZ',
-    provesLabel: 'NEYİ DESTEKLİYOR', provesCopy: 'Gerçek bir arayüz durumu vardır; ürünün herkese açık MQL5 Market sayfası bulunur; proje kayıtlarında yerel derleme ve görselsiz tester kontrolleri belgelenmiştir.',
+    provesLabel: 'NEYİ DESTEKLİYOR', provesCopy: 'Bu sunum görseli herkese açık MQL5 Market ürün sayfasında yayında; içindeki panel gerçek arayüzün arşiv karesidir (v4.01, USDJPY.5R M15 yerel test); proje kayıtlarında yerel derleme ve görselsiz tester kontrolleri belgelenmiştir.',
+    figLabel: 'GÖRSEL 01 / MARKET SUNUMU',
     notProvesLabel: 'NEYİ KANITLAMIYOR', notProvesCopy: 'Kârlılık, canlı hesap güvenliği, broker bağımsızlığı veya prop firma uygunluğu.', marketCta: 'Herkese açık ürünü incele ↗',
     processTitle: 'Tek zincir.|Üç dürüst kontrol noktası.', processIntro: 'Sonraki aşamaya geçmeden önce neyin el değiştirdiğini görmek için bir kontrol noktasını aç.',
     processRule: 'Kural sözleşmesi', processRuleCopy: 'Giriş, çıkış, bar durumu, zamanlama, veri kaynağı ve risk kuralları uygulamadan önce test edilebilir tek manifeste dönüşür.',
@@ -76,28 +116,37 @@ const copy = {
   }
 };
 
-function pathFrom(values) {
-  const step = 800 / (values.length - 1);
-  chartPoints = values.map((value, index) => ({ x: index * step, y: value }));
-  return chartPoints.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
+function toPoints(levels) {
+  const step = 800 / (levels.length - 1);
+  return levels.map((level, index) => ({ x: index * step, y: levelToY(level) }));
+}
+
+function pathFrom(points) {
+  return points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
 }
 
 function renderScenario(animate = false) {
   const pressure = Number(riskInput.value);
   const scenario = scenarios[activeRegime];
-  const origin = scenario.points[0];
-  const amplitude = .55 + pressure / 115;
-  const adjusted = scenario.points.map((value, index) => {
-    const jitter = Math.sin(index * 1.73 + pressure / 18) * (activeRegime === 'chaos' ? 7 : 3);
-    return Math.max(26, Math.min(330, origin + (value - origin) * amplitude + jitter));
-  });
-  const d = pathFrom(adjusted);
-  responsePath.setAttribute('d', d);
-  areaPath.setAttribute('d', `${d} L 800 360 L 0 360 Z`);
+  const series = buildSeries(scenario, pressure);
+  const guardedPoints = toPoints(series.guarded);
+  const rawPoints = toPoints(series.raw);
+  chartPoints = guardedPoints.map((point, index) => ({ x: point.x, y: point.y, gap: series.guarded[index] - series.raw[index] }));
+
+  const guardedTrack = pathFrom(guardedPoints);
+  const rawTrack = pathFrom(rawPoints);
+  const rawTrackBack = rawPoints.slice().reverse().map(point => `L ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
+  responsePath.setAttribute('d', guardedTrack);
+  areaPath.setAttribute('d', `${guardedTrack} L 800 360 L 0 360 Z`);
+  rawPath.setAttribute('d', rawTrack);
+  gapPath.setAttribute('d', `${guardedTrack} ${rawTrackBack} Z`);
+
+  const spread = Math.max(0, Math.round(series.guarded[STEPS - 1] - series.raw[STEPS - 1]));
   riskOutput.textContent = `${pressure}%`;
-  coverageValue.textContent = activeRegime === 'trend' ? '3 / 3' : activeRegime === 'range' ? '4 / 4' : '5 / 5';
+  coverageValue.textContent = scenario.coverage;
   loadValue.textContent = pressure < 50 ? copy[activeLanguage].normal : pressure < 80 ? copy[activeLanguage].elevated : copy[activeLanguage].severe;
   breakValue.textContent = scenario.breakPoint[activeLanguage];
+  spreadValue.textContent = `+${spread} ${copy[activeLanguage].points}`;
   if (animate && !reduceMotion) {
     chartSvg.classList.remove('is-drawing');
     void chartSvg.getBoundingClientRect();
@@ -166,7 +215,7 @@ chart.addEventListener('pointermove', event => {
   if (!point) return;
   probe.style.left = `${ratio * 100}%`;
   probe.style.setProperty('--probe-y', `${(point.y / 360) * 100}%`);
-  const state = point.y < 210 ? copy[activeLanguage].stable : copy[activeLanguage].stressed;
+  const state = point.gap > 12 ? copy[activeLanguage].stressed : copy[activeLanguage].stable;
   tooltip.textContent = `STEP ${String(index + 1).padStart(2, '0')} · ${state}`;
   tooltip.style.left = `${Math.max(3, Math.min(75, ratio * 100 - 7))}%`;
 });
